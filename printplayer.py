@@ -22,7 +22,7 @@ def main():
     import json
     import os
     batter_scoreboard = {}
-    season_2021 = "F:\\Nithin_cricdata\\JSON\\2021"
+    season_2021 = "F:\\Nithin_cricdata\\JSON\\2022"
     for match in os.listdir(season_2021):
         f = open(season_2021 + "\\" + match, "r")
         data = json.load(f)
@@ -34,16 +34,18 @@ def main():
 
         f.close()
 
-    sorted_scoreboard = sorted([(runs_data["runs"], batter) for (batter, runs_data) in batter_scoreboard.items()], reverse = True)
-    orange_cap_holder = {}    
+    sorted_scoreboard = sorted([(runs_data["runs"], batter) for (batter, runs_data) in batter_scoreboard.items()], reverse = True)    
+    orange_cap_holder = {}
+    playerno = 0
     for batter_data in sorted_scoreboard:
+        playerno += 1
         total_runs = batter_scoreboard[batter_data[1]]["runs"]
         total_balls = batter_scoreboard[batter_data[1]]["deliveries"]
         total_sixes = batter_scoreboard[batter_data[1]]["sixes"]
         total_fours = batter_scoreboard[batter_data[1]]["fours"]
         strike_rate = round(total_runs / total_balls * 100, 2)
-        print("Runs scored by", batter_data[1], "is", total_runs , "(" + str(total_balls) + ")", "at SR " + str(strike_rate) + ", sixes - " + str(total_sixes) + ", fours -", total_fours)
+        print(playerno, "Runs scored by", batter_data[1], "is", total_runs , "(" + str(total_balls) + ")", "at SR " + str(strike_rate) + ", sixes - " + str(total_sixes) + ", fours -", total_fours)
         
-    print("\n", sorted_scoreboard[0][1], "is holding the orange cap by scoring", batter_scoreboard[batter_data[1]]["runs"], "runs, when", len(sorted_scoreboard), "batters played in the tournament")
+    print("\n", sorted_scoreboard[0][1], "is holding the orange cap by scoring", sorted_scoreboard[0][0], "runs, when", len(sorted_scoreboard), "batters played in the tournament")    
 
 main()
