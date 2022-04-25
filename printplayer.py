@@ -22,9 +22,11 @@ def main():
     import json
     import os
     batter_scoreboard = {}
-    season_2021 = "F:\\Nithin_cricdata\\JSON\\2022"
+    season_2021 = "C:\\Nithin_Data\\Cric_data\\2022"
+    matches = 0
     for match in os.listdir(season_2021):
         f = open(season_2021 + "\\" + match, "r")
+        matches += 1
         data = json.load(f)
 
         overs_data = data["innings"][0]["overs"]
@@ -46,6 +48,6 @@ def main():
         strike_rate = round(total_runs / total_balls * 100, 2)
         print(playerno, "Runs scored by", batter_data[1], "is", total_runs , "(" + str(total_balls) + ")", "at SR " + str(strike_rate) + ", sixes - " + str(total_sixes) + ", fours -", total_fours)
         
-    print("\n", sorted_scoreboard[0][1], "is holding the orange cap by scoring", sorted_scoreboard[0][0], "runs, when", len(sorted_scoreboard), "batters played in the tournament")    
+    print("\n", sorted_scoreboard[0][1], "is holding the orange cap by scoring", sorted_scoreboard[0][0], "runs, when", len(sorted_scoreboard), "batters played in", matches, "matches in the tournament")    
 
 main()
